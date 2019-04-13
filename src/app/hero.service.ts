@@ -70,4 +70,14 @@ export class HeroService {
       catchError(this.handleError<Hero>("deleteHero"))
     );
   }
+
+  searchHeroes(term: string): Observable<Hero[]> {
+    if(!term.trim()) {
+      return of([]);
+    }
+
+      tap(_ => this.log(`found heroes matching "${term}"`)),
+      catchError(this.handleError<Hero[]>('search Heroes', []))
+    );
+  }
 }
